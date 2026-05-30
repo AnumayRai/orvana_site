@@ -156,11 +156,11 @@ async function loadClients(){
   document.getElementById('clientCount').textContent=data.length+' registered';
   if(data.length===0){document.getElementById('clientsTable').innerHTML='<div class="empty">No clients registered yet.</div>';return;}
   document.getElementById('clientsTable').innerHTML=`<table>
-    <thead><tr><th>Name</th><th>Phone</th><th>PAN</th><th>Registered</th></tr></thead>
+    <thead><tr><th>Name</th><th>Phone</th><th>Registered</th></tr></thead>
     <tbody>${data.map(c=>`<tr>
       <td><strong>${c.full_name}</strong></td>
       <td>${c.phone||'—'}</td>
-      <td>${c.pan_number||'—'}</td>
+      
       <td>${new Date(c.created_at).toLocaleDateString('en-IN')}</td>
     </tr>`).join('')}</tbody></table>`;
   // populate selects
