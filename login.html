@@ -176,6 +176,17 @@ async function handleLogin(){
   window.location.href='dashboard.html';
 }
 
+// ---- PAN ENCRYPTION ----
+async function hashPAN(pan){
+  const encoder=new TextEncoder();
+  // Add a fixed salt so even if someone gets the hash they can't reverse it easily
+  const salted='ORVANA_SEC_2026_'+pan+'_FINED';
+  const data=encoder.encode(salted);
+  const hashBuffer=await crypto.subtle.digest('SHA-256',data);
+  const hashArray=Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
 // ---- REGISTER ----
 async function handleRegister(){
   const fname=document.getElementById('r-fname').value.trim();
@@ -198,7 +209,17 @@ async function handleRegister(){
   if(error){showMsg('reg-msg',error.message,'error');btn.disabled=false;btn.textContent='Create my account';return;}
 
   if(data.user){
-    await sb.from('profiles').insert({id:data.user.id,full_name:fname+' '+lname,phone,pan_number:pan});
+    // Hash PAN using SHA-256 before storing - full PAN never touches the database
+    const panHash = await hashPAN(pan);
+    // Store only masked display version + hash for verification
+    const panMasked = pan.slice(0,5)+'*****';
+    await sb.from('profiles').insert({
+      id:data.user.id,
+      full_name:fname+' '+lname,
+      phone,
+      pan_number:panMasked,
+      pan_hash:panHash
+    });
   }
 
   showMsg('reg-msg','Account created! Check your email to verify, then sign in.','success');

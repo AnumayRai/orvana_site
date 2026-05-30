@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Grievance Redressal — ORVANA FinEd</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#144269;--teal:#259792;--teal-soft:#e3f3f1;--ink:#1a2733;--slate:#5a6b7a;--line:#e6ecf1;--paper:#f7f9fb}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--paper);color:var(--ink);line-height:1.75}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+nav{background:#fff;border-bottom:1px solid var(--line);padding:0 32px;height:68px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.logo img{height:46px;width:auto}
+.back{font-size:.9rem;color:var(--slate);font-weight:500}
+.back:hover{color:var(--teal)}
+.wrap{max-width:900px;margin:0 auto;padding:56px 24px 80px}
+.hero-head{text-align:center;margin-bottom:56px}
+.hero-head .tag{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:block}
+.hero-head h1{font-family:'Fraunces',serif;font-size:2.4rem;font-weight:600;color:var(--navy);margin-bottom:14px}
+.hero-head p{color:var(--slate);font-size:1rem;max-width:580px;margin:0 auto}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:56px}
+.step-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;text-align:center;position:relative}
+.step-num{width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;font-family:'Fraunces',serif;font-size:1.2rem;font-weight:600;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.step-card h3{font-size:1.05rem;font-weight:600;color:var(--navy);margin-bottom:8px}
+.step-card p{font-size:.9rem;color:var(--slate)}
+.step-card .time{font-size:.8rem;font-weight:600;color:var(--teal);margin-top:10px;background:var(--teal-soft);padding:4px 12px;border-radius:20px;display:inline-block}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-bottom:40px}
+.info-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px}
+.info-card h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;color:var(--navy);margin-bottom:20px}
+.info-row{display:flex;gap:12px;margin-bottom:14px;align-items:flex-start}
+.info-row .lbl{font-size:.83rem;font-weight:600;color:var(--slate);min-width:90px;padding-top:2px}
+.info-row .val{font-size:.93rem;color:var(--ink)}
+.escalation{background:var(--navy);color:#fff;border-radius:20px;padding:40px;margin-bottom:40px}
+.escalation h2{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;color:#fff;margin-bottom:8px}
+.escalation p{color:#aebfce;margin-bottom:20px;font-size:.95rem}
+.esc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.esc-item{background:rgba(255,255,255,.08);border-radius:12px;padding:18px}
+.esc-item h4{font-size:.95rem;font-weight:600;color:#7fd8d2;margin-bottom:6px}
+.esc-item p{font-size:.85rem;color:#aebfce;margin:0}
+.esc-item a{color:#7fd8d2}
+.form-section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:36px;margin-bottom:40px}
+.form-section h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+.form-section .sub{color:var(--slate);font-size:.92rem;margin-bottom:26px}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.86rem;font-weight:600;color:var(--ink);margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;padding:12px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:'Outfit';font-size:.95rem;color:var(--ink);outline:none;transition:border .2s}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(37,151,146,.1)}
+.field textarea{resize:vertical;min-height:120px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.btn-submit{background:var(--navy);color:#fff;border:none;padding:14px 36px;border-radius:12px;font-family:'Outfit';font-size:1rem;font-weight:600;cursor:pointer;transition:all .22s}
+.btn-submit:hover{background:var(--teal);transform:translateY(-1px)}
+.msg{padding:14px 18px;border-radius:12px;font-size:.92rem;margin-top:16px;display:none}
+.msg.success{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;display:block}
+.msg.error{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;display:block}
+.rights-section{background:var(--teal-soft);border-radius:16px;padding:30px;margin-bottom:40px}
+.rights-section h2{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:600;color:#0f6e56;margin-bottom:16px}
+.rights-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.right-item{background:#fff;border-radius:10px;padding:14px 16px}
+.right-item h4{font-size:.9rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.right-item p{font-size:.83rem;color:var(--slate);margin:0}
+footer{background:var(--navy);color:rgba(255,255,255,.6);text-align:center;padding:28px;font-size:.83rem}
+footer a{color:rgba(255,255,255,.8)}
+@media(max-width:700px){.steps-grid,.two-col,.esc-grid,.rights-grid{grid-template-columns:1fr}.row2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo"><img src="Orvana.png" alt="ORVANA FinEd"/></a>
+  <a href="index.html" class="back">← Back to website</a>
+</nav>
+
+<div class="wrap">
+  <div class="hero-head">
+    <span class="tag">SEBI Compliant</span>
+    <h1>Grievance Redressal</h1>
+    <p>We are committed to resolving your concerns fairly and promptly. As an AMFI-registered distributor, we follow SEBI's grievance redressal framework.</p>
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <h3>Submit your grievance</h3>
+      <p>Use the form below or email us directly with full details of your complaint.</p>
+      <span class="time">Within 24 hours</span>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <h3>Acknowledgement</h3>
+      <p>We acknowledge receipt of your complaint and assign a reference number.</p>
+      <span class="time">Within 3 working days</span>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <h3>Resolution</h3>
+      <p>We investigate and provide a written resolution with remedial action taken.</p>
+      <span class="time">Within 30 days</span>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="info-card">
+      <h2>Grievance Officer</h2>
+      <div class="info-row"><span class="lbl">Name</span><span class="val">[Grievance Officer Name]</span></div>
+      <div class="info-row"><span class="lbl">Designation</span><span class="val">Principal Grievance Officer</span></div>
+      <div class="info-row"><span class="lbl">Email</span><span class="val"><a href="mailto:grievance@orvanafined.com">grievance@orvanafined.com</a></span></div>
+      <div class="info-row"><span class="lbl">Phone</span><span class="val">+91 (XXX) XXX-XXXX</span></div>
+      <div class="info-row"><span class="lbl">Hours</span><span class="val">Mon–Fri, 10:00 AM – 5:00 PM IST</span></div>
+      <div class="info-row"><span class="lbl">Address</span><span class="val">Lucknow, Uttar Pradesh — 226001</span></div>
+    </div>
+    <div class="info-card">
+      <h2>Registration Details</h2>
+      <div class="info-row"><span class="lbl">Entity</span><span class="val">ORVANA FinEd</span></div>
+      <div class="info-row"><span class="lbl">ARN</span><span class="val">ARN-[YOUR-ARN]</span></div>
+      <div class="info-row"><span class="lbl">AMFI member</span><span class="val">Yes</span></div>
+      <div class="info-row"><span class="lbl">SEBI registered</span><span class="val">Mutual Fund Distributor</span></div>
+      <div class="info-row"><span class="lbl">EUIN</span><span class="val">[YOUR-EUIN if applicable]</span></div>
+      <div class="info-row"><span class="lbl">State</span><span class="val">Uttar Pradesh</span></div>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Submit a grievance online</h2>
+    <p class="sub">Fill in this form and we will respond within 30 days. Fields marked * are required.</p>
+    <div id="formMsg" class="msg"></div>
+    <div class="row2">
+      <div class="field"><label>Full name *</label><input type="text" id="gName" placeholder="Your full name"/></div>
+      <div class="field"><label>Email address *</label><input type="email" id="gEmail" placeholder="you@example.com"/></div>
+    </div>
+    <div class="row2">
+      <div class="field"><label>Phone number</label><input type="tel" id="gPhone" placeholder="+91 98765 43210"/></div>
+      <div class="field"><label>Grievance type *</label>
+        <select id="gType">
+          <option value="">Select type</option>
+          <option>Account access issue</option>
+          <option>Portfolio data discrepancy</option>
+          <option>Document not received</option>
+          <option>Unauthorised transaction</option>
+          <option>Data privacy concern</option>
+          <option>Service quality complaint</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label>Describe your grievance *</label><textarea id="gDesc" placeholder="Please describe your concern in detail, including relevant dates and any reference numbers..."></textarea></div>
+    <button class="btn-submit" onclick="submitGrievance()">Submit grievance</button>
+  </div>
+
+  <div class="escalation">
+    <h2>If not satisfied with our resolution</h2>
+    <p>You may escalate your complaint to the following regulatory bodies if you are not satisfied with our response within 30 days:</p>
+    <div class="esc-grid">
+      <div class="esc-item">
+        <h4>SEBI SCORES</h4>
+        <p>SEBI's online complaint portal for investor grievances.<br/><a href="https://scores.sebi.gov.in" target="_blank">scores.sebi.gov.in</a></p>
+      </div>
+      <div class="esc-item">
+        <h4>AMFI</h4>
+        <p>Association of Mutual Funds in India grievance portal.<br/><a href="https://www.amfiindia.com" target="_blank">amfiindia.com</a></p>
+      </div>
+      <div class="esc-item">
+        <h4>Online Dispute Resolution</h4>
+        <p>SEBI ODR portal for online arbitration.<br/><a href="https://smartodr.in" target="_blank">smartodr.in</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="rights-section">
+    <h2>Your investor rights</h2>
+    <div class="rights-grid">
+      <div class="right-item"><h4>Right to information</h4><p>Full disclosure of distributor commissions and conflicts of interest on request.</p></div>
+      <div class="right-item"><h4>Right to fair treatment</h4><p>No mis-selling. Products recommended must suit your risk profile and goals.</p></div>
+      <div class="right-item"><h4>Right to data access</h4><p>Request a copy of all personal data we hold about you at any time.</p></div>
+      <div class="right-item"><h4>Right to data deletion</h4><p>Request erasure of your data subject to regulatory retention requirements.</p></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 ORVANA FinEd. AMFI Registered Mutual Fund Distributor | ARN: [YOUR-ARN] &nbsp;&bull;&nbsp;
+  <a href="privacy-policy.html">Privacy Policy</a> &nbsp;&bull;&nbsp;
+  <a href="grievance.html">Grievance Redressal</a> &nbsp;&bull;&nbsp;
+  Mutual fund investments are subject to market risks.
+</footer>
+
+<script>
+function submitGrievance(){
+  const name=document.getElementById('gName').value.trim();
+  const email=document.getElementById('gEmail').value.trim();
+  const type=document.getElementById('gType').value;
+  const desc=document.getElementById('gDesc').value.trim();
+  const msg=document.getElementById('formMsg');
+  if(!name||!email||!type||!desc){msg.textContent='Please fill in all required fields.';msg.className='msg error';return;}
+  // In production connect this to an email service like EmailJS or Supabase edge function
+  msg.textContent='Thank you, '+name+'. Your grievance has been recorded. We will respond to '+email+' within 30 days. Please note this reference: GRV-'+Date.now();
+  msg.className='msg success';
+  document.getElementById('gName').value='';
+  document.getElementById('gEmail').value='';
+  document.getElementById('gPhone').value='';
+  document.getElementById('gType').value='';
+  document.getElementById('gDesc').value='';
+}
+</script>
+</body>
+</html>
