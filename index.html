@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ORVANA FinEd | Financial Awareness & Mutual Fund Distribution</title>
+<meta name="description" content="ORVANA FinEd empowers India's middle class through financial education and mutual fund distribution. Simple, transparent, goal-based investing." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#144269;
+    --navy-deep:#0d2e49;
+    --teal:#259792;
+    --teal-soft:#e3f3f1;
+    --ink:#1a2733;
+    --slate:#5a6b7a;
+    --paper:#f7f9fb;
+    --line:#e6ecf1;
+    --gold:#c9a24b;
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Outfit',sans-serif;color:var(--ink);background:#fff;line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:500;line-height:1.15;letter-spacing:-0.01em}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+  .accent{color:var(--teal)}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .navbar{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .logo{display:flex;align-items:center}
+  .logo-img{height:58px;width:auto;display:block;transition:transform .3s}
+  .logo:hover .logo-img{transform:scale(1.03)}
+  .logo-img-foot{height:70px;margin-bottom:16px;background:#fff;padding:8px 12px;border-radius:10px}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{font-size:.94rem;font-weight:500;color:var(--ink);transition:color .2s;position:relative}
+  .nav-links a:not(.btn)::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:2px;background:var(--teal);transition:width .25s}
+  .nav-links a:not(.btn):hover{color:var(--teal)}
+  .nav-links a:not(.btn):hover::after{width:100%}
+  .btn{display:inline-block;padding:11px 24px;border-radius:40px;font-weight:600;font-size:.92rem;transition:all .22s;cursor:pointer;border:none}
+  .btn-primary{background:var(--navy);color:#fff}
+  .btn-primary:hover{background:var(--teal);transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,151,146,.28)}
+  .btn-teal{background:var(--teal);color:#fff}
+  .btn-teal:hover{background:#1c7e7a;transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,151,146,.3)}
+  .btn-ghost{background:transparent;border:1.6px solid var(--navy);color:var(--navy)}
+  .btn-ghost:hover{background:var(--navy);color:#fff}
+  .nav-toggle{display:none;font-size:1.5rem;color:var(--navy);background:none;border:none;cursor:pointer}
+
+  /* HERO */
+  .hero{position:relative;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 70%);color:#fff;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at 70% 30%,#000,transparent 75%);-webkit-mask-image:radial-gradient(circle at 70% 30%,#000,transparent 75%)}
+  .hero::after{content:"";position:absolute;top:-120px;right:-120px;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(37,151,146,.32),transparent 68%)}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;padding:84px 0 92px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.78rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#7fd8d2;border:1px solid rgba(127,216,210,.34);padding:7px 16px;border-radius:30px;margin-bottom:24px;animation:fadeUp .7s ease both}
+  .eyebrow-dot{width:7px;height:7px;border-radius:50%;background:#7fd8d2;box-shadow:0 0 0 0 rgba(127,216,210,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(127,216,210,.5)}70%{box-shadow:0 0 0 8px rgba(127,216,210,0)}100%{box-shadow:0 0 0 0 rgba(127,216,210,0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  .hero h1{font-size:3.15rem;font-weight:600;margin-bottom:22px;animation:fadeUp .7s .08s ease both}
+  .hero h1 em{font-style:italic;color:#7fd8d2;font-weight:500}
+  .hero p.lead{font-size:1.12rem;color:#cdd9e4;max-width:480px;margin-bottom:32px;animation:fadeUp .7s .16s ease both}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:34px;animation:fadeUp .7s .24s ease both}
+  .trust-row{display:flex;gap:26px;flex-wrap:wrap;animation:fadeUp .7s .32s ease both}
+  .trust-row div{display:flex;flex-direction:column}
+  .trust-row b{font-family:'Fraunces';font-size:1.5rem;font-weight:600;color:#fff}
+  .trust-row span{font-size:.8rem;color:#9fb2c4}
+
+  /* CALCULATOR */
+  .calc{background:#fff;color:var(--ink);border-radius:22px;padding:30px;box-shadow:0 30px 70px rgba(8,28,48,.34);animation:fadeUp .8s .3s ease both;position:relative;z-index:2}
+  .calc-tabs{display:flex;gap:6px;background:var(--paper);padding:5px;border-radius:12px;margin-bottom:22px}
+  .calc-tab{flex:1;text-align:center;padding:9px 6px;border-radius:9px;font-size:.86rem;font-weight:600;color:var(--slate);cursor:pointer;transition:all .2s;border:none;background:none}
+  .calc-tab.active{background:#fff;color:var(--navy);box-shadow:0 2px 8px rgba(20,66,105,.12)}
+  .calc-title{font-family:'Fraunces';font-size:1.28rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+  .calc-sub{font-size:.82rem;color:var(--slate);margin-bottom:20px}
+  .field{margin-bottom:18px}
+  .field-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+  .field-head label{font-size:.86rem;font-weight:500;color:var(--ink)}
+  .field-val{font-size:.96rem;font-weight:700;color:var(--teal)}
+  input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:6px;background:var(--line);outline:none;cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--teal);border:3px solid #fff;box-shadow:0 2px 6px rgba(37,151,146,.4);cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--teal);border:3px solid #fff;cursor:pointer}
+  .num-input{width:100%;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;font-family:'Outfit';font-size:.95rem;color:var(--ink);outline:none;transition:border .2s}
+  .num-input:focus{border-color:var(--teal)}
+  .result-box{background:linear-gradient(150deg,var(--teal-soft),#eef7f6);border-radius:14px;padding:18px 20px;margin-top:6px}
+  .result-row{display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:9px;color:var(--slate)}
+  .result-row span:last-child{font-weight:600;color:var(--ink)}
+  .result-row.gain span:last-child{color:var(--teal)}
+  .result-total{display:flex;justify-content:space-between;align-items:center;border-top:1.5px dashed rgba(37,151,146,.4);padding-top:13px;margin-top:6px}
+  .result-total b{font-family:'Fraunces';font-size:.98rem;color:var(--navy);font-weight:600}
+  .result-total .big{font-family:'Fraunces';font-size:1.7rem;font-weight:600;color:var(--teal)}
+  .calc-note{font-size:.7rem;color:#8a98a6;margin-top:13px;line-height:1.5}
+
+  /* SECTION SHELL */
+  section{scroll-margin-top:90px}
+  .sec-pad{padding:88px 0}
+  .sec-head{text-align:center;max-width:660px;margin:0 auto 56px}
+  .sec-head .tag{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:block}
+  .sec-head h2{font-size:2.4rem;font-weight:600;color:var(--navy);margin-bottom:16px}
+  .sec-head p{font-size:1.05rem;color:var(--slate)}
+
+  /* ABOUT */
+  .about{background:var(--paper)}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:58px;align-items:center}
+  .about-col h2{font-size:2.3rem;font-weight:600;color:var(--navy);margin-bottom:20px}
+  .about-col .tag{font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:block}
+  .about-col p{color:var(--slate);font-size:1.04rem;margin-bottom:18px}
+  .value-list{display:grid;gap:16px;margin-top:8px}
+  .value-item{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .value-item .vi-icon{flex-shrink:0;width:44px;height:44px;border-radius:11px;background:var(--teal-soft);color:var(--teal);display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-weight:600;font-size:1.2rem}
+  .value-item h4{font-family:'Outfit';font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:3px}
+  .value-item p{font-size:.9rem;color:var(--slate);margin:0}
+
+  /* PRODUCTS */
+  .prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .prod-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px 28px;transition:all .28s;position:relative;overflow:hidden}
+  .prod-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:var(--teal);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+  .prod-card:hover{transform:translateY(-7px);box-shadow:0 22px 48px rgba(20,66,105,.14);border-color:transparent}
+  .prod-card:hover::before{transform:scaleX(1)}
+  .prod-icon{width:54px;height:54px;border-radius:14px;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:22px;transition:background .28s}
+  .prod-card:hover .prod-icon{background:var(--teal)}
+  .prod-card h3{font-size:1.3rem;font-weight:600;color:var(--navy);margin-bottom:11px}
+  .prod-card p{color:var(--slate);font-size:.96rem}
+
+  /* SERVICES STRIP */
+  .services{background:var(--navy);color:#fff;border-radius:24px;padding:54px 48px;margin-top:30px}
+  .services h3{font-size:1.7rem;font-weight:600;margin-bottom:8px;color:#fff}
+  .services .ssub{color:#aebfce;margin-bottom:34px;font-size:1rem}
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .svc-item{display:flex;flex-direction:column;gap:9px}
+  .svc-item .si-icon{width:42px;height:42px;border-radius:10px;background:rgba(127,216,210,.16);color:#7fd8d2;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+  .svc-item h4{font-family:'Outfit';font-size:1rem;font-weight:600;color:#fff}
+  .svc-item p{font-size:.85rem;color:#9fb2c4;margin:0}
+
+  /* ADVISORS */
+  .advisors{background:var(--paper)}
+  .adv-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:920px;margin:0 auto}
+  .adv-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:34px;display:flex;gap:24px;align-items:flex-start;transition:all .28s}
+  .adv-card:hover{box-shadow:0 18px 44px rgba(20,66,105,.12);transform:translateY(-4px)}
+  .adv-photo{flex-shrink:0;width:96px;height:96px;border-radius:18px;background:linear-gradient(150deg,var(--navy),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'Fraunces';font-size:1.9rem;font-weight:600;color:#fff;overflow:hidden}
+  .adv-photo img{width:100%;height:100%;object-fit:cover}
+  .adv-info h3{font-size:1.32rem;font-weight:600;color:var(--navy);margin-bottom:3px}
+  .adv-info .role{font-size:.86rem;font-weight:600;color:var(--teal);margin-bottom:12px;display:block}
+  .adv-info p{font-size:.92rem;color:var(--slate);margin:0}
+
+  /* CTA BANNER */
+  .cta-banner{background:linear-gradient(135deg,var(--teal),#1c7e7a);border-radius:24px;padding:56px 48px;text-align:center;color:#fff;position:relative;overflow:hidden}
+  .cta-banner::before{content:"";position:absolute;top:-80px;right:-40px;width:260px;height:260px;border-radius:50%;background:rgba(255,255,255,.08)}
+  .cta-banner h2{font-size:2.2rem;font-weight:600;color:#fff;margin-bottom:14px;position:relative}
+  .cta-banner p{color:#d6f0ee;max-width:520px;margin:0 auto 28px;font-size:1.05rem;position:relative}
+  .cta-banner .btn{position:relative}
+  .btn-white{background:#fff;color:var(--teal)}
+  .btn-white:hover{background:var(--navy);color:#fff;transform:translateY(-1px)}
+
+  /* FOOTER */
+  footer{background:var(--navy-deep);color:#fff;padding:64px 0 30px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:48px}
+  .foot-brand .logo{color:#fff;margin-bottom:16px}
+  .foot-brand p{color:#9fb2c4;font-size:.92rem;max-width:280px}
+  .foot-col h5{font-family:'Outfit';font-size:.82rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7fd8d2;margin-bottom:18px}
+  .foot-col a,.foot-col p{display:block;color:#aebfce;font-size:.92rem;margin-bottom:11px;transition:color .2s}
+  .foot-col a:hover{color:#fff}
+  .foot-disclaimer{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;font-size:.76rem;color:#7d92a6;line-height:1.7}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:24px;font-size:.84rem;color:#9fb2c4}
+
+  /* REVEAL ANIM */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:900px){
+    .hero-grid,.about-grid,.adv-grid{grid-template-columns:1fr;gap:40px}
+    .prod-grid{grid-template-columns:1fr}
+    .svc-grid{grid-template-columns:repeat(2,1fr)}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .hero h1{font-size:2.4rem}
+    .nav-links{position:fixed;top:74px;left:0;right:0;background:#fff;flex-direction:column;gap:0;padding:0;max-height:0;overflow:hidden;transition:max-height .3s;border-bottom:1px solid var(--line)}
+    .nav-links.open{max-height:420px;padding:14px 24px 22px}
+    .nav-links a{width:100%;padding:13px 0;border-bottom:1px solid var(--line)}
+    .nav-links a.btn{margin-top:14px;text-align:center;border-bottom:none}
+    .nav-toggle{display:block}
+  }
+  @media(max-width:560px){
+    .svc-grid,.foot-grid{grid-template-columns:1fr}
+    .services,.cta-banner{padding:38px 26px}
+    .adv-card{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap navbar">
+    <a href="#top" class="logo">
+      <img src="Orvana.png" alt="ORVANA FinEd — Financial Awareness | Mutual Fund Distribution" class="logo-img" />
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#services">Services</a>
+      <a href="#advisors">Advisors</a>
+      <a href="#contact">Contact</a>
+      <a href="#" class="btn btn-primary">Client Login</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Financial awareness &middot; Mutual fund distribution</span>
+      <h1>Empowering India's middle class through <em>financial education</em>.</h1>
+      <p class="lead">We design simple, transparent investment journeys that turn your monthly savings into lasting prosperity — no jargon, no pressure.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-teal">Start your journey</a>
+        <a href="#products" class="btn btn-ghost" style="border-color:rgba(255,255,255,.5);color:#fff">Explore products</a>
+      </div>
+      <div class="trust-row">
+        <div><b>25+</b><span>Years of advisory experience</span></div>
+        <div><b>100%</b><span>Transparent, goal-based plans</span></div>
+        <div><b>Zero</b><span>Jargon, ever</span></div>
+      </div>
+    </div>
+
+    <!-- MULTI-CALCULATOR -->
+    <div class="calc" id="calc">
+      <div class="calc-tabs">
+        <button class="calc-tab active" data-tab="sip">SIP</button>
+        <button class="calc-tab" data-tab="lump">Lumpsum</button>
+        <button class="calc-tab" data-tab="gst">GST</button>
+      </div>
+
+      <!-- SIP -->
+      <div class="calc-panel" data-panel="sip">
+        <div class="calc-title">SIP estimator</div>
+        <div class="calc-sub">See how monthly investing could grow over time.</div>
+        <div class="field">
+          <div class="field-head"><label>Monthly investment</label><span class="field-val" id="sipAmtV">&#8377;5,000</span></div>
+          <input type="range" id="sipAmt" min="500" max="100000" step="500" value="5000" />
+        </div>
+        <div class="field">
+          <div class="field-head"><label>Time period</label><span class="field-val" id="sipYrV">10 yrs</span></div>
+          <input type="range" id="sipYr" min="1" max="30" step="1" value="10" />
+        </div>
+        <div class="field">
+          <div class="field-head"><label>Expected return (p.a.)</label><span class="field-val" id="sipRetV">12%</span></div>
+          <input type="range" id="sipRet" min="5" max="20" step="1" value="12" />
+        </div>
+        <div class="result-box">
+          <div class="result-row"><span>Invested amount</span><span id="sipInv">&#8377;6,00,000</span></div>
+          <div class="result-row gain"><span>Est. returns</span><span id="sipGain">+&#8377;5,61,695</span></div>
+          <div class="result-total"><b>Projected value</b><span class="big" id="sipTot">&#8377;11,61,695</span></div>
+        </div>
+        <p class="calc-note">Illustrative only, assuming constant returns. Actual mutual fund returns vary and are not guaranteed.</p>
+      </div>
+
+      <!-- LUMPSUM -->
+      <div class="calc-panel" data-panel="lump" style="display:none">
+        <div class="calc-title">Lumpsum estimator</div>
+        <div class="calc-sub">Project the growth of a one-time investment.</div>
+        <div class="field">
+          <div class="field-head"><label>Investment amount</label><span class="field-val" id="lumAmtV">&#8377;1,00,000</span></div>
+          <input type="range" id="lumAmt" min="5000" max="5000000" step="5000" value="100000" />
+        </div>
+        <div class="field">
+          <div class="field-head"><label>Time period</label><span class="field-val" id="lumYrV">10 yrs</span></div>
+          <input type="range" id="lumYr" min="1" max="30" step="1" value="10" />
+        </div>
+        <div class="field">
+          <div class="field-head"><label>Expected return (p.a.)</label><span class="field-val" id="lumRetV">12%</span></div>
+          <input type="range" id="lumRet" min="5" max="20" step="1" value="12" />
+        </div>
+        <div class="result-box">
+          <div class="result-row"><span>Invested amount</span><span id="lumInv">&#8377;1,00,000</span></div>
+          <div class="result-row gain"><span>Est. returns</span><span id="lumGain">+&#8377;2,10,585</span></div>
+          <div class="result-total"><b>Projected value</b><span class="big" id="lumTot">&#8377;3,10,585</span></div>
+        </div>
+        <p class="calc-note">Illustrative only, assuming constant compounding. Actual mutual fund returns vary and are not guaranteed.</p>
+      </div>
+
+      <!-- GST -->
+      <div class="calc-panel" data-panel="gst" style="display:none">
+        <div class="calc-title">GST estimator</div>
+        <div class="calc-sub">Quick GST calculation for invoicing.</div>
+        <div class="field">
+          <div class="field-head"><label>Base amount</label></div>
+          <input type="number" class="num-input" id="gstBase" value="100000" min="0" />
+        </div>
+        <div class="field">
+          <div class="field-head"><label>GST rate</label><span class="field-val" id="gstRateV">18%</span></div>
+          <input type="range" id="gstRate" min="0" max="28" step="1" value="18" />
+        </div>
+        <div class="field" style="display:flex;gap:10px">
+          <button class="calc-tab active" id="gstAdd" style="flex:1;background:#fff;color:var(--navy);box-shadow:0 2px 8px rgba(20,66,105,.12)">Add GST</button>
+          <button class="calc-tab" id="gstInc" style="flex:1">GST inclusive</button>
+        </div>
+        <div class="result-box">
+          <div class="result-row"><span>Base amount</span><span id="gstB">&#8377;1,00,000</span></div>
+          <div class="result-row gain"><span>GST amount</span><span id="gstAmt">+&#8377;18,000</span></div>
+          <div class="result-total"><b>Total amount</b><span class="big" id="gstTot">&#8377;1,18,000</span></div>
+        </div>
+        <p class="calc-note">For estimation only. Confirm applicable rates and HSN/SAC codes for your specific goods or services.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section class="about sec-pad" id="about">
+  <div class="wrap about-grid">
+    <div class="about-col reveal">
+      <span class="tag">Our philosophy</span>
+      <h2>Financial freedom, made accessible.</h2>
+      <p>At ORVANA FinEd, we're on a mission to uplift India's middle class — because we believe every hardworking family deserves financial freedom and a brighter future. We go beyond traditional wealth management to become your growth partners.</p>
+      <p>Whether it's planning for your child's education, buying your dream home, or building a retirement corpus, we craft personalized strategies that align with your real-life goals and budget — with complete transparency and zero jargon.</p>
+    </div>
+    <div class="about-col reveal">
+      <div class="value-list">
+        <div class="value-item">
+          <span class="vi-icon">&#9633;</span>
+          <div><h4>Education first</h4><p>We make complex financial concepts simple, so you invest with understanding, not blind trust.</p></div>
+        </div>
+        <div class="value-item">
+          <span class="vi-icon">&#8857;</span>
+          <div><h4>Goal-based planning</h4><p>Every strategy is built around your real-life milestones and monthly budget.</p></div>
+        </div>
+        <div class="value-item">
+          <span class="vi-icon">&#9651;</span>
+          <div><h4>Full transparency</h4><p>No hidden agendas, no jargon. You always know where your money is and why.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="sec-pad" id="products">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">What we offer</span>
+      <h2>Solutions for every life goal</h2>
+      <p>Goal-oriented investment journeys designed to help India's families grow and protect their wealth, step by step.</p>
+    </div>
+    <div class="prod-grid">
+      <div class="prod-card reveal">
+        <div class="prod-icon">&#9650;</div>
+        <h3>Wealth growth journey</h3>
+        <p>Goal-based mutual fund portfolios built for long-term capital appreciation, matched to your risk comfort and timeline.</p>
+      </div>
+      <div class="prod-card reveal">
+        <div class="prod-icon">&#9678;</div>
+        <h3>Secure horizon plan</h3>
+        <p>Structured retirement planning so you can look forward to financial independence and genuine peace of mind.</p>
+      </div>
+      <div class="prod-card reveal">
+        <div class="prod-icon">&#9670;</div>
+        <h3>Legacy &amp; estate guidance</h3>
+        <p>Thoughtful guidance on wealth preservation and smooth transfer of assets to the next generation.</p>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="services reveal" id="services">
+      <h3>Beyond investing — full back-office support</h3>
+      <p class="ssub">Practical services that keep your financial life and your business running smoothly.</p>
+      <div class="svc-grid">
+        <div class="svc-item"><span class="si-icon">&#9993;</span><h4>Domain email</h4><p>Professional, branded email for your business.</p></div>
+        <div class="svc-item"><span class="si-icon">&#9783;</span><h4>CRM &amp; leads</h4><p>Organised client and lead management.</p></div>
+        <div class="svc-item"><span class="si-icon">&#8470;</span><h4>GST &amp; invoicing</h4><p>Compliant invoicing and filing support.</p></div>
+        <div class="svc-item"><span class="si-icon">&#9636;</span><h4>Bookkeeping</h4><p>Accurate accounting and bookkeeping.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVISORS -->
+<section class="advisors sec-pad" id="advisors">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="tag">Meet our advisors</span>
+      <h2>Your dedicated financial architects</h2>
+      <p>Guided by experience, driven by your success.</p>
+    </div>
+    <div class="adv-grid">
+      <div class="adv-card reveal">
+        <div class="adv-photo">PS</div>
+        <div class="adv-info">
+          <h3>Dr. Pushpa Sinha</h3>
+          <span class="role">Ph.D. in Economics</span>
+          <p>Dr. Sinha brings deep economic insight and a research-driven approach to strengthening India's middle class. She crafts tailored investment strategies that aim to keep your portfolio secure and aligned with rising opportunities.</p>
+        </div>
+      </div>
+      <div class="adv-card reveal">
+        <div class="adv-photo">AK</div>
+        <div class="adv-info">
+          <h3>Mr. Amit Kumar</h3>
+          <span class="role">25+ years in wealth advisory</span>
+          <p>With over two decades of hands-on experience, Mr. Kumar helps families confidently navigate mutual funds. His market wisdom simplifies complex decisions and turns steady savings into sustainable growth.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec-pad" id="contact" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-banner reveal">
+      <h2>Ready to secure your financial future?</h2>
+      <p>Book a free, no-obligation consultation. We'll listen to your goals and map out a simple, transparent plan to reach them.</p>
+      <a href="mailto:info@orvanafined.com" class="btn btn-white">Get in touch today</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="logo"><img src="Orvana.png" alt="ORVANA FinEd" class="logo-img logo-img-foot" /></a>
+        <p>Empowering India's middle class through financial awareness and trustworthy mutual fund distribution.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#about">About us</a>
+        <a href="#advisors">Our advisors</a>
+        <a href="#products">Products</a>
+        <a href="#services">Services</a>
+      </div>
+      <div class="foot-col">
+        <h5>Get started</h5>
+        <a href="#contact">Contact</a>
+        <a href="#">Client login</a>
+        <a href="#calc">SIP calculator</a>
+      </div>
+      <div class="foot-col">
+        <h5>Reach us</h5>
+        <a href="mailto:info@orvanafined.com">info@orvanafined.com</a>
+        <p>+91 (XXX) XXX-XXXX</p>
+        <p>Lucknow, Uttar Pradesh, India</p>
+      </div>
+    </div>
+    <div class="foot-disclaimer">
+      <strong>Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing.</strong>
+      ORVANA FinEd acts as a mutual fund distributor. We do not provide investment advisory services or guarantee any returns. Calculators on this site are for illustration only and do not represent assured or projected returns of any scheme. AMFI Registration No. (ARN): [add your ARN here].
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; 2026 ORVANA FinEd. All rights reserved.</span>
+      <span>Privacy Policy &middot; Terms &middot; Disclosures</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const fmt = n => '\u20B9' + Math.round(n).toLocaleString('en-IN');
+  const yrLabel = (id,v) => v + (v==1?' yr':' yrs');
+
+  // ---- Tabs ----
+  document.querySelectorAll('.calc-tab[data-tab]').forEach(t=>{
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.calc-tab[data-tab]').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      document.querySelectorAll('.calc-panel').forEach(p=>p.style.display='none');
+      document.querySelector('[data-panel="'+t.dataset.tab+'"]').style.display='block';
+    });
+  });
+
+  // ---- SIP ----
+  const sipAmt=document.getElementById('sipAmt'),sipYr=document.getElementById('sipYr'),sipRet=document.getElementById('sipRet');
+  function sip(){
+    const P=+sipAmt.value,y=+sipYr.value,r=+sipRet.value;
+    const i=r/12/100,m=y*12;
+    const fv=P*((Math.pow(1+i,m)-1)/i)*(1+i);
+    const inv=P*m;
+    document.getElementById('sipAmtV').textContent=fmt(P);
+    document.getElementById('sipYrV').textContent=yrLabel('',y);
+    document.getElementById('sipRetV').textContent=r+'%';
+    document.getElementById('sipInv').textContent=fmt(inv);
+    document.getElementById('sipGain').textContent='+'+fmt(fv-inv);
+    document.getElementById('sipTot').textContent=fmt(fv);
+  }
+  [sipAmt,sipYr,sipRet].forEach(e=>e.addEventListener('input',sip));sip();
+
+  // ---- LUMPSUM ----
+  const lumAmt=document.getElementById('lumAmt'),lumYr=document.getElementById('lumYr'),lumRet=document.getElementById('lumRet');
+  function lump(){
+    const P=+lumAmt.value,y=+lumYr.value,r=+lumRet.value;
+    const fv=P*Math.pow(1+r/100,y);
+    document.getElementById('lumAmtV').textContent=fmt(P);
+    document.getElementById('lumYrV').textContent=yrLabel('',y);
+    document.getElementById('lumRetV').textContent=r+'%';
+    document.getElementById('lumInv').textContent=fmt(P);
+    document.getElementById('lumGain').textContent='+'+fmt(fv-P);
+    document.getElementById('lumTot').textContent=fmt(fv);
+  }
+  [lumAmt,lumYr,lumRet].forEach(e=>e.addEventListener('input',lump));lump();
+
+  // ---- GST ----
+  const gstBase=document.getElementById('gstBase'),gstRate=document.getElementById('gstRate');
+  let gstMode='add';
+  document.getElementById('gstAdd').addEventListener('click',function(){gstMode='add';this.classList.add('active');this.style.cssText='flex:1;background:#fff;color:var(--navy);box-shadow:0 2px 8px rgba(20,66,105,.12)';document.getElementById('gstInc').classList.remove('active');document.getElementById('gstInc').style.cssText='flex:1';gst();});
+  document.getElementById('gstInc').addEventListener('click',function(){gstMode='inc';this.classList.add('active');this.style.cssText='flex:1;background:#fff;color:var(--navy);box-shadow:0 2px 8px rgba(20,66,105,.12)';document.getElementById('gstAdd').classList.remove('active');document.getElementById('gstAdd').style.cssText='flex:1';gst();});
+  function gst(){
+    const amt=+gstBase.value||0,r=+gstRate.value;
+    document.getElementById('gstRateV').textContent=r+'%';
+    let base,tax,total;
+    if(gstMode==='add'){base=amt;tax=amt*r/100;total=amt+tax;}
+    else{total=amt;base=amt/(1+r/100);tax=total-base;}
+    document.getElementById('gstB').textContent=fmt(base);
+    document.getElementById('gstAmt').textContent='+'+fmt(tax);
+    document.getElementById('gstTot').textContent=fmt(total);
+  }
+  [gstBase,gstRate].forEach(e=>e.addEventListener('input',gst));gst();
+
+  // ---- Mobile nav ----
+  const tog=document.getElementById('navToggle'),links=document.getElementById('navLinks');
+  tog.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  // ---- Scroll reveal ----
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
