@@ -8,89 +8,210 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
-:root{--navy:#144269;--teal:#259792;--ink:#1a2733;--slate:#5a6b7a;--line:#e6ecf1;--paper:#f7f9fb;--radius:16px}
+:root{--navy:#144269;--teal:#259792;--teal-soft:#e3f3f1;--ink:#1a2733;--slate:#5a6b7a;--line:#e6ecf1;--paper:#f7f9fb}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Outfit',sans-serif;background:var(--paper);min-height:100vh;display:flex;flex-direction:column}
+body{font-family:'Outfit',sans-serif;background:linear-gradient(160deg,var(--navy) 0%,#0d2e49 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
 a{text-decoration:none;color:inherit}
-.topbar{background:#fff;border-bottom:1px solid var(--line);padding:0 32px;height:68px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center}
-.logo img{height:48px;width:auto}
-.topbar-link{font-size:.9rem;color:var(--slate);font-weight:500}
-.topbar-link:hover{color:var(--teal)}
-.main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 16px}
-.card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:44px 40px;width:100%;max-width:440px;box-shadow:0 20px 60px rgba(20,66,105,.08)}
-.card-head{text-align:center;margin-bottom:32px}
-.card-head h1{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:600;color:var(--navy);margin-bottom:8px}
-.card-head p{color:var(--slate);font-size:.95rem}
-.field{margin-bottom:20px}
-.field label{display:block;font-size:.87rem;font-weight:600;color:var(--ink);margin-bottom:7px}
-.field input{width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:'Outfit';font-size:.97rem;color:var(--ink);outline:none;transition:border .2s,box-shadow .2s}
+
+/* LOGO */
+.logo-wrap{margin-bottom:28px;text-align:center}
+.logo-wrap img{height:56px;width:auto;background:#fff;padding:8px 14px;border-radius:12px}
+
+/* CARD */
+.card{background:#fff;border-radius:24px;width:100%;max-width:460px;overflow:hidden;box-shadow:0 40px 80px rgba(8,28,48,.4)}
+
+/* TABS */
+.tab-bar{display:grid;grid-template-columns:1fr 1fr}
+.tab-btn{padding:18px;font-family:'Outfit';font-size:.97rem;font-weight:600;border:none;cursor:pointer;transition:all .25s;background:var(--paper);color:var(--slate);border-bottom:2px solid var(--line)}
+.tab-btn.active{background:#fff;color:var(--navy);border-bottom:2px solid var(--teal)}
+
+/* PANELS */
+.panel{padding:36px;display:none}
+.panel.active{display:block}
+.panel-head{margin-bottom:28px}
+.panel-head h2{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:600;color:var(--navy);margin-bottom:6px}
+.panel-head p{color:var(--slate);font-size:.93rem}
+
+/* FIELDS */
+.field{margin-bottom:18px}
+.field label{display:block;font-size:.86rem;font-weight:600;color:var(--ink);margin-bottom:7px}
+.field input{width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:12px;font-family:'Outfit';font-size:.96rem;color:var(--ink);outline:none;transition:border .2s,box-shadow .2s;background:#fff}
 .field input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(37,151,146,.1)}
-.btn-full{width:100%;padding:14px;background:var(--navy);color:#fff;border:none;border-radius:12px;font-family:'Outfit';font-size:1rem;font-weight:600;cursor:pointer;transition:all .22s;margin-top:6px}
-.btn-full:hover{background:var(--teal);transform:translateY(-1px);box-shadow:0 8px 22px rgba(37,151,146,.28)}
-.btn-full:disabled{opacity:.6;cursor:not-allowed;transform:none}
-.divider{text-align:center;color:var(--slate);font-size:.87rem;margin:22px 0;position:relative}
-.divider::before{content:"";position:absolute;left:0;top:50%;width:42%;height:1px;background:var(--line)}
-.divider::after{content:"";position:absolute;right:0;top:50%;width:42%;height:1px;background:var(--line)}
-.link-row{text-align:center;font-size:.9rem;color:var(--slate);margin-top:20px}
-.link-row a{color:var(--teal);font-weight:600}
-.link-row a:hover{text-decoration:underline}
-.msg{padding:12px 16px;border-radius:10px;font-size:.9rem;margin-bottom:18px;display:none}
+.field .hint{font-size:.77rem;color:var(--slate);margin-top:5px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* BUTTON */
+.btn-full{width:100%;padding:15px;background:var(--navy);color:#fff;border:none;border-radius:12px;font-family:'Outfit';font-size:1rem;font-weight:600;cursor:pointer;transition:all .22s;margin-top:4px;letter-spacing:.01em}
+.btn-full:hover{background:var(--teal);transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,151,146,.3)}
+.btn-full:disabled{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* MESSAGES */
+.msg{padding:12px 16px;border-radius:10px;font-size:.88rem;margin-bottom:16px;display:none;line-height:1.5}
 .msg.error{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;display:block}
 .msg.success{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;display:block}
-footer{text-align:center;padding:20px;font-size:.8rem;color:#9fb2c4}
+
+/* DISCLAIMER */
+.disclaimer{font-size:.76rem;color:var(--slate);text-align:center;margin-top:18px;line-height:1.6;padding:0 4px}
+
+/* FOOTER */
+.foot{margin-top:22px;text-align:center;font-size:.78rem;color:rgba(255,255,255,.45)}
+
+@media(max-width:480px){
+  .panel{padding:26px 22px}
+  .row2{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <a href="index.html" class="logo"><img src="Orvana.png" alt="ORVANA FinEd"/></a>
-  <a href="index.html" class="topbar-link">← Back to website</a>
+
+<div class="logo-wrap">
+  <a href="index.html"><img src="Orvana.png" alt="ORVANA FinEd"/></a>
 </div>
-<div class="main">
-  <div class="card">
-    <div class="card-head">
-      <h1>Client Login</h1>
-      <p>Access your investment portfolio and documents</p>
+
+<div class="card">
+  <!-- TAB BAR -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('login')">Sign in</button>
+    <button class="tab-btn" onclick="switchTab('register')">Create account</button>
+  </div>
+
+  <!-- LOGIN PANEL -->
+  <div class="panel active" id="panel-login">
+    <div class="panel-head">
+      <h2>Welcome back</h2>
+      <p>Sign in to access your investment portfolio</p>
     </div>
-    <div id="msg" class="msg"></div>
+    <div id="login-msg" class="msg"></div>
     <div class="field">
       <label>Email address</label>
-      <input type="email" id="email" placeholder="you@example.com" autocomplete="email"/>
+      <input type="email" id="l-email" placeholder="you@example.com" autocomplete="email"/>
     </div>
     <div class="field">
       <label>Password</label>
-      <input type="password" id="password" placeholder="Enter your password" autocomplete="current-password"/>
+      <input type="password" id="l-pass" placeholder="Enter your password" autocomplete="current-password"/>
     </div>
-    <button class="btn-full" id="loginBtn" onclick="handleLogin()">Sign in</button>
-    <div class="divider">or</div>
-    <div class="link-row">Don't have an account? <a href="register.html">Register here</a></div>
+    <button class="btn-full" id="loginBtn" onclick="handleLogin()">Sign in to my account</button>
+    <p class="disclaimer">Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully.</p>
+  </div>
+
+  <!-- REGISTER PANEL -->
+  <div class="panel" id="panel-register">
+    <div class="panel-head">
+      <h2>Create account</h2>
+      <p>Register to access your portfolio and documents</p>
+    </div>
+    <div id="reg-msg" class="msg"></div>
+    <div class="row2">
+      <div class="field">
+        <label>First name</label>
+        <input type="text" id="r-fname" placeholder="Amit"/>
+      </div>
+      <div class="field">
+        <label>Last name</label>
+        <input type="text" id="r-lname" placeholder="Kumar"/>
+      </div>
+    </div>
+    <div class="field">
+      <label>Email address</label>
+      <input type="email" id="r-email" placeholder="you@example.com" autocomplete="email"/>
+    </div>
+    <div class="field">
+      <label>Phone number</label>
+      <input type="tel" id="r-phone" placeholder="+91 98765 43210"/>
+    </div>
+    <div class="field">
+      <label>PAN number</label>
+      <input type="text" id="r-pan" placeholder="ABCDE1234F" maxlength="10" style="text-transform:uppercase"/>
+      <div class="hint">Required for KYC verification</div>
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" id="r-pass" placeholder="Minimum 8 characters"/>
+    </div>
+    <div class="field">
+      <label>Confirm password</label>
+      <input type="password" id="r-confirm" placeholder="Re-enter your password"/>
+    </div>
+    <button class="btn-full" id="regBtn" onclick="handleRegister()">Create my account</button>
+    <p class="disclaimer">By registering you confirm that ORVANA FinEd is a mutual fund distributor. Investments are subject to market risks.</p>
   </div>
 </div>
-<footer>&copy; 2026 ORVANA FinEd. Mutual fund investments are subject to market risks.</footer>
+
+<div class="foot">&copy; 2026 ORVANA FinEd. All rights reserved. &nbsp;&bull;&nbsp; <a href="index.html" style="color:rgba(255,255,255,.55)">Back to website</a></div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPA_URL='https://vwznmkcytvpnkuycntnu.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3em5ta2N5dHZwbmt1eWNudG51Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxMTU3OTEsImV4cCI6MjA5NTY5MTc5MX0.oIWG5jPWFL5FqD9xSTKiVSIlrUqa7wAtiNDR3U21Xz4';
 const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
 
-function showMsg(text,type){const m=document.getElementById('msg');m.textContent=text;m.className='msg '+type;}
+// redirect if already logged in
+sb.auth.getSession().then(({data})=>{if(data.session)window.location.href='dashboard.html';});
 
+function switchTab(tab){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['login','register'][i]===tab));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+tab).classList.add('active');
+  // clear messages
+  document.getElementById('login-msg').className='msg';
+  document.getElementById('reg-msg').className='msg';
+}
+
+function showMsg(id,text,type){
+  const m=document.getElementById(id);
+  m.textContent=text;m.className='msg '+type;
+  m.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+// ---- LOGIN ----
 async function handleLogin(){
-  const email=document.getElementById('email').value.trim();
-  const pass=document.getElementById('password').value;
+  const email=document.getElementById('l-email').value.trim();
+  const pass=document.getElementById('l-pass').value;
   const btn=document.getElementById('loginBtn');
-  if(!email||!pass){showMsg('Please fill in all fields.','error');return;}
+  if(!email||!pass){showMsg('login-msg','Please fill in all fields.','error');return;}
   btn.disabled=true;btn.textContent='Signing in...';
   const{data,error}=await sb.auth.signInWithPassword({email,password:pass});
-  if(error){showMsg(error.message,'error');btn.disabled=false;btn.textContent='Sign in';return;}
-  // check if admin
+  if(error){showMsg('login-msg',error.message,'error');btn.disabled=false;btn.textContent='Sign in to my account';return;}
   if(email==='admin@orvanafined.com'){window.location.href='admin.html';return;}
   window.location.href='dashboard.html';
 }
 
-document.addEventListener('keydown',e=>{if(e.key==='Enter')handleLogin();});
-// if already logged in, redirect
-sb.auth.getSession().then(({data})=>{if(data.session){window.location.href='dashboard.html';}});
+// ---- REGISTER ----
+async function handleRegister(){
+  const fname=document.getElementById('r-fname').value.trim();
+  const lname=document.getElementById('r-lname').value.trim();
+  const email=document.getElementById('r-email').value.trim();
+  const phone=document.getElementById('r-phone').value.trim();
+  const pan=document.getElementById('r-pan').value.trim().toUpperCase();
+  const pass=document.getElementById('r-pass').value;
+  const conf=document.getElementById('r-confirm').value;
+  const btn=document.getElementById('regBtn');
+
+  if(!fname||!lname||!email||!phone||!pan||!pass||!conf){showMsg('reg-msg','Please fill in all fields.','error');return;}
+  if(pass.length<8){showMsg('reg-msg','Password must be at least 8 characters.','error');return;}
+  if(pass!==conf){showMsg('reg-msg','Passwords do not match.','error');return;}
+  if(!/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(pan)){showMsg('reg-msg','Enter a valid PAN (e.g. ABCDE1234F).','error');return;}
+
+  btn.disabled=true;btn.textContent='Creating account...';
+
+  const{data,error}=await sb.auth.signUp({email,password:pass,options:{data:{full_name:fname+' '+lname,phone,pan_number:pan}}});
+  if(error){showMsg('reg-msg',error.message,'error');btn.disabled=false;btn.textContent='Create my account';return;}
+
+  if(data.user){
+    await sb.from('profiles').insert({id:data.user.id,full_name:fname+' '+lname,phone,pan_number:pan});
+  }
+
+  showMsg('reg-msg','Account created! Check your email to verify, then sign in.','success');
+  btn.textContent='Account created ✓';
+  setTimeout(()=>{switchTab('login');btn.disabled=false;btn.textContent='Create my account';},3000);
+}
+
+// enter key support
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter')return;
+  if(document.getElementById('panel-login').classList.contains('active'))handleLogin();
+  else handleRegister();
+});
 </script>
 </body>
 </html>
