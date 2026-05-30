@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin Panel — ORVANA FinEd</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--navy:#144269;--teal:#259792;--teal-soft:#e3f3f1;--ink:#1a2733;--slate:#5a6b7a;--line:#e6ecf1;--paper:#f7f9fb}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:var(--paper);min-height:100vh}
+a{text-decoration:none;color:inherit}
+.topbar{background:var(--navy);padding:0 32px;height:68px;display:flex;align-items:center;justify-content:space-between}
+.logo img{height:44px;width:auto;background:#fff;padding:6px 10px;border-radius:8px}
+.admin-badge{background:var(--teal);color:#fff;padding:6px 14px;border-radius:20px;font-size:.83rem;font-weight:700;letter-spacing:.05em}
+.btn-logout{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;padding:8px 18px;border-radius:30px;font-family:'Outfit';font-size:.86rem;font-weight:600;cursor:pointer}
+.btn-logout:hover{background:rgba(255,255,255,.25)}
+.wrap{max-width:1200px;margin:0 auto;padding:40px 24px}
+.page-head{margin-bottom:32px}
+.page-head h1{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;color:var(--navy);margin-bottom:4px}
+.page-head p{color:var(--slate)}
+.tabs{display:flex;gap:6px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px;margin-bottom:28px;width:fit-content}
+.tab{padding:10px 22px;border-radius:10px;font-size:.9rem;font-weight:600;color:var(--slate);cursor:pointer;border:none;background:none;transition:all .2s}
+.tab.active{background:var(--navy);color:#fff}
+.section{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;margin-bottom:24px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.section-head h2{font-family:'Fraunces',serif;font-size:1.35rem;font-weight:600;color:var(--navy)}
+table{width:100%;border-collapse:collapse}
+th{font-size:.82rem;font-weight:600;color:var(--slate);text-transform:uppercase;letter-spacing:.07em;padding:0 14px 14px;text-align:left}
+td{padding:13px 14px;font-size:.93rem;border-top:1px solid var(--line)}
+tr:hover td{background:var(--paper)}
+.btn{padding:8px 16px;border-radius:8px;font-family:'Outfit';font-size:.84rem;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:var(--teal)}
+.btn-teal{background:var(--teal);color:#fff}.btn-teal:hover{background:#1c7e7a}
+.btn-danger{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca}.btn-danger:hover{background:#fee2e2}
+.btn-sm{padding:6px 12px;font-size:.8rem}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:20px;padding:36px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto}
+.modal h3{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:600;color:var(--navy);margin-bottom:22px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.86rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+.field input,.field select{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:'Outfit';font-size:.95rem;outline:none;transition:border .2s}
+.field input:focus,.field select:focus{border-color:var(--teal)}
+.modal-btns{display:flex;gap:10px;margin-top:22px}
+.modal-btns .btn{flex:1;padding:12px}
+.msg{padding:10px 14px;border-radius:8px;font-size:.88rem;margin-bottom:14px;display:none}
+.msg.error{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;display:block}
+.msg.success{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;display:block}
+.empty{text-align:center;padding:40px;color:var(--slate)}
+.client-select{width:100%;padding:11px 14px;border:1.5px solid var(--line);border-radius:10px;font-family:'Outfit';font-size:.95rem;margin-bottom:16px;outline:none}
+.client-select:focus{border-color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" class="logo"><img src="Orvana.png" alt="ORVANA FinEd"/></a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <span class="admin-badge">ADMIN</span>
+    <button class="btn-logout" onclick="logout()">Sign out</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="page-head">
+    <h1>Admin Panel</h1>
+    <p>Manage clients, portfolios and documents</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('clients')">Clients</button>
+    <button class="tab" onclick="switchTab('portfolio')">Portfolio</button>
+    <button class="tab" onclick="switchTab('documents')">Documents</button>
+  </div>
+
+  <!-- CLIENTS TAB -->
+  <div id="tab-clients">
+    <div class="section">
+      <div class="section-head">
+        <h2>All Registered Clients</h2>
+        <span id="clientCount" style="color:var(--slate);font-size:.9rem"></span>
+      </div>
+      <div id="clientsTable"><div class="empty">Loading...</div></div>
+    </div>
+  </div>
+
+  <!-- PORTFOLIO TAB -->
+  <div id="tab-portfolio" style="display:none">
+    <div class="section">
+      <div class="section-head">
+        <h2>Add Portfolio Entry</h2>
+      </div>
+      <div id="pfMsg" class="msg"></div>
+      <div class="field"><label>Select client</label>
+        <select id="pfClient" class="client-select"><option value="">Loading clients...</option></select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="field"><label>Fund name</label><input type="text" id="pfFund" placeholder="e.g. HDFC Mid Cap Opportunities"/></div>
+        <div class="field"><label>Amount invested (₹)</label><input type="number" id="pfAmount" placeholder="50000"/></div>
+        <div class="field"><label>Units allotted</label><input type="number" id="pfUnits" placeholder="120.456" step="0.001"/></div>
+        <div class="field"><label>Current NAV (₹)</label><input type="number" id="pfNav" placeholder="485.50" step="0.01"/></div>
+      </div>
+      <button class="btn btn-primary" onclick="addPortfolio()">Add fund entry</button>
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>All Portfolio Entries</h2></div>
+      <div id="portfolioTable"><div class="empty">Loading...</div></div>
+    </div>
+  </div>
+
+  <!-- DOCUMENTS TAB -->
+  <div id="tab-documents" style="display:none">
+    <div class="section">
+      <div class="section-head"><h2>Add Document Link</h2></div>
+      <div id="docMsg" class="msg"></div>
+      <div class="field"><label>Select client</label>
+        <select id="docClient" class="client-select"><option value="">Loading clients...</option></select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+        <div class="field"><label>Document name</label><input type="text" id="docName" placeholder="e.g. Account Statement June 2026"/></div>
+        <div class="field"><label>Document URL</label><input type="url" id="docUrl" placeholder="https://drive.google.com/..."/></div>
+      </div>
+      <p style="font-size:.83rem;color:var(--slate);margin-bottom:14px">Upload the PDF to Google Drive, Dropbox, or any storage, then paste the shareable link above.</p>
+      <button class="btn btn-primary" onclick="addDocument()">Add document</button>
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>All Documents</h2></div>
+      <div id="documentsTable"><div class="empty">Loading...</div></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPA_URL='https://vwznmkcytvpnkuycntnu.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3em5ta2N5dHZwbmt1eWNudG51Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAxMTU3OTEsImV4cCI6MjA5NTY5MTc5MX0.oIWG5jPWFL5FqD9xSTKiVSIlrUqa7wAtiNDR3U21Xz4';
+const sb=supabase.createClient(SUPA_URL,SUPA_KEY);
+const fmt=n=>'₹'+Math.round(n).toLocaleString('en-IN');
+let clients=[];
+
+async function logout(){await sb.auth.signOut();window.location.href='login.html';}
+
+function switchTab(name){
+  ['clients','portfolio','documents'].forEach(t=>{
+    document.getElementById('tab-'+t).style.display=t===name?'block':'none';
+    document.querySelectorAll('.tab')[['clients','portfolio','documents'].indexOf(t)].classList.toggle('active',t===name);
+  });
+}
+
+function showMsg(id,text,type){const m=document.getElementById(id);m.textContent=text;m.className='msg '+type;}
+
+async function loadClients(){
+  const{data,error}=await sb.from('profiles').select('*').order('created_at',{ascending:false});
+  if(error||!data){document.getElementById('clientsTable').innerHTML='<div class="empty">Error loading clients.</div>';return;}
+  clients=data;
+  document.getElementById('clientCount').textContent=data.length+' registered';
+  if(data.length===0){document.getElementById('clientsTable').innerHTML='<div class="empty">No clients registered yet.</div>';return;}
+  document.getElementById('clientsTable').innerHTML=`<table>
+    <thead><tr><th>Name</th><th>Phone</th><th>PAN</th><th>Registered</th></tr></thead>
+    <tbody>${data.map(c=>`<tr>
+      <td><strong>${c.full_name}</strong></td>
+      <td>${c.phone||'—'}</td>
+      <td>${c.pan_number||'—'}</td>
+      <td>${new Date(c.created_at).toLocaleDateString('en-IN')}</td>
+    </tr>`).join('')}</tbody></table>`;
+  // populate selects
+  const opts=data.map(c=>`<option value="${c.id}">${c.full_name}</option>`).join('');
+  document.getElementById('pfClient').innerHTML='<option value="">Select a client</option>'+opts;
+  document.getElementById('docClient').innerHTML='<option value="">Select a client</option>'+opts;
+}
+
+async function loadPortfolio(){
+  const{data}=await sb.from('portfolio').select('*, profiles(full_name)').order('created_at',{ascending:false});
+  if(!data||data.length===0){document.getElementById('portfolioTable').innerHTML='<div class="empty">No portfolio entries yet.</div>';return;}
+  document.getElementById('portfolioTable').innerHTML=`<table>
+    <thead><tr><th>Client</th><th>Fund</th><th>Invested</th><th>Units</th><th>NAV</th><th>Value</th><th></th></tr></thead>
+    <tbody>${data.map(p=>`<tr>
+      <td>${p.profiles?.full_name||'—'}</td>
+      <td>${p.fund_name}</td>
+      <td>${fmt(p.amount)}</td>
+      <td>${p.units?.toFixed(3)}</td>
+      <td>${fmt(p.nav)}</td>
+      <td>${fmt(p.units*p.nav)}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="deletePortfolio('${p.id}')">Remove</button></td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+async function loadDocuments(){
+  const{data}=await sb.from('documents').select('*, profiles(full_name)').order('uploaded_at',{ascending:false});
+  if(!data||data.length===0){document.getElementById('documentsTable').innerHTML='<div class="empty">No documents uploaded yet.</div>';return;}
+  document.getElementById('documentsTable').innerHTML=`<table>
+    <thead><tr><th>Client</th><th>Document</th><th>Date</th><th></th></tr></thead>
+    <tbody>${data.map(d=>`<tr>
+      <td>${d.profiles?.full_name||'—'}</td>
+      <td><a href="${d.url}" target="_blank" style="color:var(--teal);font-weight:500">${d.name}</a></td>
+      <td>${new Date(d.uploaded_at).toLocaleDateString('en-IN')}</td>
+      <td><button class="btn btn-danger btn-sm" onclick="deleteDoc('${d.id}')">Remove</button></td>
+    </tr>`).join('')}</tbody></table>`;
+}
+
+async function addPortfolio(){
+  const clientId=document.getElementById('pfClient').value;
+  const fund=document.getElementById('pfFund').value.trim();
+  const amount=parseFloat(document.getElementById('pfAmount').value);
+  const units=parseFloat(document.getElementById('pfUnits').value);
+  const nav=parseFloat(document.getElementById('pfNav').value);
+  if(!clientId||!fund||!amount||!units||!nav){showMsg('pfMsg','Please fill in all fields.','error');return;}
+  const{error}=await sb.from('portfolio').insert({client_id:clientId,fund_name:fund,amount,units,nav});
+  if(error){showMsg('pfMsg',error.message,'error');return;}
+  showMsg('pfMsg','Portfolio entry added successfully.','success');
+  document.getElementById('pfFund').value='';
+  document.getElementById('pfAmount').value='';
+  document.getElementById('pfUnits').value='';
+  document.getElementById('pfNav').value='';
+  loadPortfolio();
+}
+
+async function addDocument(){
+  const clientId=document.getElementById('docClient').value;
+  const name=document.getElementById('docName').value.trim();
+  const url=document.getElementById('docUrl').value.trim();
+  if(!clientId||!name||!url){showMsg('docMsg','Please fill in all fields.','error');return;}
+  const{error}=await sb.from('documents').insert({client_id:clientId,name,url});
+  if(error){showMsg('docMsg',error.message,'error');return;}
+  showMsg('docMsg','Document added successfully.','success');
+  document.getElementById('docName').value='';
+  document.getElementById('docUrl').value='';
+  loadDocuments();
+}
+
+async function deletePortfolio(id){
+  if(!confirm('Remove this portfolio entry?'))return;
+  await sb.from('portfolio').delete().eq('id',id);
+  loadPortfolio();
+}
+
+async function deleteDoc(id){
+  if(!confirm('Remove this document?'))return;
+  await sb.from('documents').delete().eq('id',id);
+  loadDocuments();
+}
+
+async function init(){
+  const{data:{session}}=await sb.auth.getSession();
+  if(!session){window.location.href='login.html';return;}
+  await loadClients();
+  await loadPortfolio();
+  await loadDocuments();
+}
+
+init();
+</script>
+</body>
+</html>
